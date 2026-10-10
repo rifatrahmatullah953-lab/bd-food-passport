@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#064e3b">
+<title>ফুড পাসপোর্ট | বাংলাদেশের ৬৪ জেলা</title>
+<style>
+:root{--green:#064e3b;--green2:#0f766e;--cream:#fffaf0;--orange:#f97316;--ink:#15352e;--muted:#60736d;--line:#dce8df}
+*{box-sizing:border-box}body{margin:0;background:#f5f7f1;color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+header{background:var(--green);color:white;padding:15px max(16px,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}.logo{width:42px;height:48px;border:2px solid #f9d77b;border-radius:8px;display:grid;place-items:center;font-size:25px;transform:rotate(-5deg)}
+header small{display:block;font-size:11px;font-weight:400;color:#d7eee5}.pill{border:1px solid #a8d7c3;color:white;background:#ffffff12;border-radius:99px;padding:8px 13px}
+main{max-width:1120px;margin:auto;padding:18px 14px 40px}.hero{background:linear-gradient(120deg,#064e3b,#0d7662);border-radius:22px;color:white;padding:24px;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;overflow:hidden}
+h1{font-size:clamp(27px,4vw,42px);line-height:1.25;margin:0 0 10px}.hero p{line-height:1.7;color:#d9f1e7;margin:0 0 18px}.stats{display:flex;gap:9px;flex-wrap:wrap}.stat{background:#ffffff16;border:1px solid #ffffff2b;padding:10px 13px;border-radius:12px;min-width:100px}.stat b{display:block;font-size:23px}.hero-art{min-height:190px;border-radius:18px;background:radial-gradient(circle at 50% 50%,#f8d78a 0 7%,transparent 8%),radial-gradient(circle at 35% 40%,#f97316 0 8%,transparent 9%),radial-gradient(circle at 67% 62%,#facc15 0 9%,transparent 10%),linear-gradient(145deg,#d7f5d9,#fef3c7);display:grid;place-items:center;color:var(--green);text-align:center;padding:15px}.map-emoji{font-size:70px;filter:drop-shadow(0 5px 2px #0002)}.hero-art strong{font-size:20px}
+.section-title{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:24px 0 12px}.section-title h2{font-size:22px;margin:0}.muted{color:var(--muted);font-size:13px}
+.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:15px}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 5px 20px #12351b08}
+.progressrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.bar{height:9px;background:#e7eee8;border-radius:99px;overflow:hidden;margin:10px 0 16px}.bar span{display:block;height:100%;background:linear-gradient(90deg,#059669,#f59e0b);width:0%}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tools input,.tools select{border:1px solid var(--line);border-radius:10px;padding:10px;background:white;color:var(--ink);font:inherit;min-width:0}.tools input{flex:1;min-width:150px}
+.districts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.district{border:1px solid #d7e8db;border-radius:10px;padding:9px 5px;background:#f8fbf7;text-align:center;cursor:pointer;color:var(--ink);font:inherit;font-size:13px}.district:hover{border-color:#0f766e}.district.done{background:#d6f5df;border-color:#16a34a}.district.done:before{content:"✓ ";color:#087443;font-weight:900}
+.foods{display:grid;gap:9px}.food{display:flex;gap:10px;align-items:center;border:1px solid var(--line);padding:10px;border-radius:13px}.food .emoji{font-size:29px;background:#fff4df;border-radius:10px;padding:7px}.foodinfo{flex:1}.foodinfo b{display:block}.foodinfo small{color:var(--muted)}.check{border:0;background:#e3f4e9;color:#075b40;border-radius:99px;padding:8px 10px;font:inherit;font-size:12px;cursor:pointer}.check.active{background:var(--green);color:white}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{border:0;background:var(--green);color:white;border-radius:12px;padding:12px 16px;font:inherit;font-weight:700;cursor:pointer}.btn.orange{background:var(--orange)}.btn.light{background:#e4f2e9;color:var(--green)}.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px}.empty{padding:20px;text-align:center;color:var(--muted)}
+footer{text-align:center;padding:20px;color:#e2f2e9;background:#063c30;font-size:13px}
+@media(max-width:760px){header{padding:12px 14px}.brand{font-size:17px}.hero{grid-template-columns:1fr;padding:20px}.hero-art{min-height:120px}.map-emoji{font-size:45px}.layout{grid-template-columns:1fr}.districts{grid-template-columns:repeat(3,minmax(0,1fr))}.section-title h2{font-size:19px}.panel{padding:13px}}
+</style></head>
+<body>
+<header><div class="brand"><div class="logo">🍴</div><div>ফুড পাসপোর্ট<small>বাংলাদেশের ৬৪ জেলা • Taste every district</small></div></div><button class="pill" onclick="resetAll()">রিসেট ↻</button></header>
+<main>
+<section class="hero"><div><h1>বাংলাদেশের ৬৪ জেলার<br><span style="color:#facc15">স্বাদের খোঁজে!</span></h1><p>যে জেলার বিখ্যাত খাবার খেয়েছ, সেটি বেছে নাও। নিজের ফুড কালেকশন তৈরি করো, অগ্রগতি দেখো, আর বন্ধুদের সঙ্গে শেয়ার করো।</p><div class="stats"><div class="stat"><b>৬৪</b><small>জেলা</small></div><div class="stat"><b id="foodCount">০</b><small>খাবার চেক-ইন</small></div><div class="stat"><b id="districtCount">০</b><small>জেলা কালেক্টেড</small></div></div></div><div class="hero-art"><div><div class="map-emoji">🇧🇩🍛</div><strong>এক দেশ, অসংখ্য স্বাদ</strong><div style="margin-top:5px">তোমার খাবারের গল্প শুরু হোক</div></div></div></section>
+<div class="section-title"><h2>🗺️ তোমার জেলা পাসপোর্ট</h2><span class="muted">জেলা বেছে নাও</span></div>
+<div class="layout"><section class="panel"><div class="progressrow"><b>তোমার অগ্রগতি</b><b id="percent">০%</b></div><div class="bar"><span id="barfill"></span></div><div class="tools"><input id="search" placeholder="জেলা খুঁজুন…" oninput="renderDistricts()"><select id="division" onchange="renderDistricts()"><option value="">সব বিভাগ</option><option>ঢাকা</option><option>চট্টগ্রাম</option><option>রাজশাহী</option><option>খুলনা</option><option>বরিশাল</option><option>সিলেট</option><option>রংপুর</option><option>ময়মনসিংহ</option></select></div><div class="districts" id="districts"></div><p class="note">নোট: এটি প্রথম প্রোটোটাইপের জেলা-নির্বাচন ভিউ; ভৌগোলিক সীমানাসহ আসল ইন্টার‌্যাক্টিভ ম্যাপ পরের সংস্করণে যুক্ত করা যাবে।</p></section>
+<section class="panel"><div class="progressrow"><h2 id="selectedTitle" style="font-size:20px;margin:0">খাবার বেছে নাও</h2><span class="muted" id="foodtotal"></span></div><p class="muted" id="selectedHelp">বাম পাশ থেকে একটি জেলা নির্বাচন করো।</p><div class="foods" id="foods"><div class="empty">🍲<br>জেলা নির্বাচন করলে এখানে খাবারের তালিকা আসবে।</div></div><div class="actions"><button class="btn orange" onclick="makePassport()">আমার ফুড পাসপোর্ট তৈরি</button><button class="btn light" onclick="shareProgress()">শেয়ার করো</button></div><p class="note">তোমার চেক-ইন এই ব্রাউজারের লোকাল স্টোরেজে থাকে। ব্রাউজারের ডেটা মুছে গেলে তথ্যও মুছে যেতে পারে।</p></section></div>
+<div class="section-title"><h2>🍽️ জনপ্রিয় খাবার</h2><span class="muted">নমুনা তালিকা</span></div>
+<section class="panel"><div class="foods" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))" id="popular"></div></section>
+</main><footer>ফুড পাসপোর্ট 🇧🇩 • বাংলাদেশের স্বাদ, তোমার সংগ্রহে ❤️<br><small>প্রাথমিক ডেমো — খাবারের তথ্য ও জেলার ম্যাপ পরবর্তী ধাপে যাচাই ও সমৃদ্ধ করা হবে।</small></footer>
+<script>
+const districts = [
+["ঢাকা","ঢাকা"],["গাজীপুর","ঢাকা"],["নারায়ণগঞ্জ","ঢাকা"],["নরসিংদী","ঢাকা"],["মুন্সিগঞ্জ","ঢাকা"],["মানিকগঞ্জ","ঢাকা"],["মাদারীপুর","ঢাকা"],["শরীয়তপুর","ঢাকা"],["ফরিদপুর","ঢাকা"],["রাজবাড়ী","ঢাকা"],["গোপালগঞ্জ","ঢাকা"],["টাঙ্গাইল","ঢাকা"],["কিশোরগঞ্জ","ঢাকা"],
+["চট্টগ্রাম","চট্টগ্রাম"],["কক্সবাজার","চট্টগ্রাম"],["কুমিল্লা","চট্টগ্রাম"],["ব্রাহ্মণবাড়িয়া","চট্টগ্রাম"],["চাঁদপুর","চট্টগ্রাম"],["ফেনী","চট্টগ্রাম"],["নোয়াখালী","চট্টগ্রাম"],["লক্ষ্মীপুর","চট্টগ্রাম"],["রাঙামাটি","চট্টগ্রাম"],["খাগড়াছড়ি","চট্টগ্রাম"],["বান্দরবান","চট্টগ্রাম"],
+["রাজশাহী","রাজশাহী"],["বগুড়া","রাজশাহী"],["পাবনা","রাজশাহী"],["সিরাজগঞ্জ","রাজশাহী"],["নাটোর","রাজশাহী"],["নওগাঁ","রাজশাহী"],["জয়পুরহাট","রাজশাহী"],["চাঁপাইনবাবগঞ্জ","রাজশাহী"],
+["খুলনা","খুলনা"],["যশোর","খুলনা"],["সাতক্ষীরা","খুলনা"],["বাগেরহাট","খুলনা"],["নড়াইল","খুলনা"],["মাগুরা","খুলনা"],["ঝিনাইদহ","খুলনা"],["কুষ্টিয়া","খুলনা"],["চুয়াডাঙ্গা","খুলনা"],["মেহেরপুর","খুলনা"],
+["বরিশাল","বরিশাল"],["ভোলা","বরিশাল"],["পটুয়াখালী","বরিশাল"],["পিরোজপুর","বরিশাল"],["বরগুনা","বরিশাল"],["ঝালকাঠি","বরিশাল"],
+["সিলেট","সিলেট"],["মৌলভীবাজার","সিলেট"],["হবিগঞ্জ","সিলেট"],["সুনামগঞ্জ","সিলেট"],
+["রংপুর","রংপুর"],["দিনাজপুর","রংপুর"],["কুড়িগ্রাম","রংপুর"],["গাইবান্ধা","রংপুর"],["নীলফামারী","রংপুর"],["লালমনিরহাট","রংপুর"],["পঞ্চগড়","রংপুর"],["ঠাকুরগাঁও","রংপুর"],
+["ময়মনসিংহ","ময়মনসিংহ"],["জামালপুর","ময়মনসিংহ"],["নেত্রকোনা","ময়মনসিংহ"],["শেরপুর","ময়মনসিংহ"]];
+const foodsByDistrict={
+"ঢাকা":[["ঢাকার বিরিয়ানি","🍛"],["বাকরখানি","🥮"],["মোরগ পোলাও","🍗"]],
+"বগুড়া":[["বগুড়ার দই","🥣"],["দই-মিষ্টি","🍮"]],
+"কুমিল্লা":[["রসমালাই","🍮"],["মিষ্টি","🍬"]],
+"চাঁদপুর":[["ইলিশ","🐟"],["ইলিশ ভাজা","🍽️"]],
+"সিলেট":[["সাতকরা দিয়ে মাংস","🍲"],["নাগা মরিচের পদ","🌶️"]],
+"রাজশাহী":[["আম","🥭"],["কালাই রুটি","🫓"]],
+"খুলনা":[["চুইঝাল","🍲"],["চিংড়ি","🦐"]],
+"চট্টগ্রাম":[["মেজবানি মাংস","🍖"],["কালাভুনা","🍛"]],
+"নোয়াখালী":[["নারিকেলের নাড়ু","🥥"]],
+"পাবনা":[["ঘি ও মিষ্টি","🍮"]],
+"নাটোর":[["কাঁচাগোল্লা","🍬"]],
+"কক্সবাজার":[["শুঁটকি","🐟"],["সামুদ্রিক মাছ","🦐"]],
+"বরিশাল":[["আমড়া","🥭"],["মাছ-ভাত","🐟"]],
+"ময়মনসিংহ":[["মুক্তাগাছার মণ্ডা","🍬"]],
+"যশোর":[["খেজুরের গুড়","🍯"]],
+"দিনাজপুর":[["লিচু","🍒"],["চিড়া","🥣"]],
+"টাঙ্গাইল":[["চমচম","🍮"]]
+};
+let selected = "ঢাকা"; let checked = load();
+function load(){try{return JSON.parse(localStorage.getItem("foodpassport-v1")||"{}")}catch(e){return {}}}
+function save(){localStorage.setItem("foodpassport-v1",JSON.stringify(checked));}
+function bn(n){return String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d])}
+function foodsFor(d){return foodsByDistrict[d]||[[d+"-এর স্থানীয় খাবার","🍲"],["ঐতিহ্যবাহী পদ","🥘"],["স্থানীয় মিষ্টি","🍮"]]}
+function renderDistricts(){let q=document.getElementById("search").value.trim();let div=document.getElementById("division").value;let el=document.getElementById("districts");el.innerHTML="";districts.filter(([d,v])=>d.includes(q)&&(!div||v===div)).forEach(([d])=>{let b=document.createElement("button");b.className="district"+(isDone(d)?" done":"");b.textContent=d;b.onclick=()=>{selected=d;renderDistricts();renderFoods()};if(d===selected)b.style.outline="2px solid #f97316";el.appendChild(b)})}
+function isDone(d){return foodsFor(d).every(([f])=>checked[d+"|"+f])}
+function renderFoods(){document.getElementById("selectedTitle").textContent="📍 "+selected+" জেলার খাবার";document.getElementById("selectedHelp").textContent="যে খাবারটি খেয়েছ, সেটিতে চেক-ইন করো।";let arr=foodsFor(selected),el=document.getElementById("foods");el.innerHTML="";document.getElementById("foodtotal").textContent=bn(arr.filter(([f])=>checked[selected+"|"+f]).length)+" / "+bn(arr.length);arr.forEach(([f,e])=>{let row=document.createElement("div");row.className="food";let on=!!checked[selected+"|"+f];row.innerHTML='<div class="emoji">'+e+'</div><div class="foodinfo"><b>'+f+'</b><small>'+selected+' • ফুড পাসপোর্ট</small></div><button class="check '+(on?'active':'')+'">'+(on?'✓ যোগ হয়েছে':'+ খেয়েছি')+'</button>';row.querySelector("button").onclick=()=>{let k=selected+"|"+f;if(checked[k])delete checked[k];else checked[k]=true;save();renderAll()};el.appendChild(row)});}
+function renderPopular(){let list=[["ঢাকা","বিরিয়ানি","🍛"],["চাঁদপুর","ইলিশ","🐟"],["কুমিল্লা","রসমালাই","🍮"],["বগুড়া","দই","🥣"],["নাটোর","কাঁচাগোল্লা","🍬"],["সিলেট","সাতকরা","🍲"]];document.getElementById("popular").innerHTML=list.map(([d,f,e])=>'<div class="food"><div class="emoji">'+e+'</div><div class="foodinfo"><b>'+f+'</b><small>'+d+'</small></div><button class="check" onclick="selected='+JSON.stringify(d)+';renderAll()">দেখুন</button></div>').join("")}
+function renderAll(){renderDistricts();renderFoods();renderPopular();let n=Object.keys(checked).length,ds=new Set(Object.keys(checked).map(k=>k.split("|")[0]));document.getElementById("foodCount").textContent=bn(n);document.getElementById("districtCount").textContent=bn(ds.size);let p=Math.round(ds.size/64*100);document.getElementById("percent").textContent=bn(p)+"%";document.getElementById("barfill").style.width=p+"%"}
+function makePassport(){let n=Object.keys(checked).length,ds=new Set(Object.keys(checked).map(k=>k.split("|")[0]));let c=document.createElement("canvas");c.width=900;c.height=1100;let x=c.getContext("2d");x.fillStyle="#064e3b";x.fillRect(0,0,900,1100);x.fillStyle="#fff8e7";x.beginPath();x.roundRect(35,35,830,1030,35);x.fill();x.fillStyle="#064e3b";x.font="bold 48px sans-serif";x.fillText("FOOD PASSPORT",85,130);x.font="bold 38px sans-serif";x.fillText("BANGLADESH • 64 DISTRICTS",85,190);x.font="100px sans-serif";x.fillText("🇧🇩",85,340);x.fillStyle="#f97316";x.fillRect(85,390,730,5);x.fillStyle="#12352e";x.font="bold 42px sans-serif";x.fillText("MY FOOD JOURNEY",85,485);x.font="bold 74px sans-serif";x.fillText(String(n),85,600);x.font="30px sans-serif";x.fillText("FOODS COLLECTED",85,650);x.font="bold 74px sans-serif";x.fillText(String(ds.size)+"/64",85,780);x.font="30px sans-serif";x.fillText("DISTRICTS EXPLORED",85,830);x.font="28px sans-serif";x.fillText("Taste every district, collect every flavor!",85,950);x.font="22px sans-serif";x.fillText("Food Passport • Prototype",85,1010);let a=document.createElement("a");a.download="my-food-passport.png";a.href=c.toDataURL("image/png");a.click()}
+async function shareProgress(){let n=Object.keys(checked).length,ds=new Set(Object.keys(checked).map(k=>k.split("|")[0])).size;let t="আমার ফুড পাসপোর্ট 🇧🇩🍛\n"+n+"টি খাবার চেক-ইন করেছি, "+ds+"/64 জেলা ঘুরে/চেখে দেখেছি!\nতুমিও নিজের ফুড কালেকশন তৈরি করো।";if(navigator.share){try{await navigator.share({title:"আমার ফুড পাসপোর্ট",text:t})}catch(e){}}else if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>alert("শেয়ার টেক্সট কপি হয়েছে!"))}else alert(t)}
+function resetAll(){if(confirm("সব চেক-ইন মুছে ফেলবে?")){checked={};save();renderAll()}}
+renderAll();
+</script></body></html>
