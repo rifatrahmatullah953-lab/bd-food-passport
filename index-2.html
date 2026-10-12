@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ফুড পাসপোর্ট | বাংলাদেশের ৬৪ জেলা</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--green:#064b3c;--pale:#f4f7f0;--line:#dce7df;--orange:#ff7417}
+*{box-sizing:border-box}body{margin:0;background:var(--pale);color:#183b32;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+header{background:var(--green);color:white;padding:24px 16px 28px;text-align:center}header h1{margin:0 0 8px;font-size:clamp(25px,5vw,38px)}header p{margin:0;color:#d7eee2}
+main{max-width:950px;margin:auto;padding:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px;margin:16px 0;box-shadow:0 5px 20px #183b3208}
+h2{font-size:24px;margin:0 0 8px}p.muted{color:#708079;margin-top:4px}
+#map{height:480px;border-radius:16px;border:1px solid var(--line);overflow:hidden;background:#dff1f8}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.controls input,.controls select{min-width:0;flex:1;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px}.district{padding:11px 8px;background:#f8fbf7;border:1px solid var(--line);border-radius:12px;font:inherit;color:inherit;cursor:pointer}.district.active,.district:hover{background:#dff3e7;border-color:#8fc5a6}
+.foods{display:grid;gap:10px}.food{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:16px}.emoji{background:#fff4df;border-radius:12px;padding:12px;font-size:27px}.food strong{display:block;font-size:18px}.food small{color:#738078}
+footer{background:#073d31;color:#e2f1e8;text-align:center;padding:24px 14px;margin-top:30px}
+.btn{border:0;background:var(--orange);color:white;border-radius:14px;padding:14px 18px;font:inherit;font-weight:700;cursor:pointer}
+.note{font-size:14px;color:#687970;line-height:1.7}
+@media(max-width:520px){.card{padding:14px;border-radius:18px}#map{height:390px}}
+</style>
+</head>
+<body>
+<header><h1>🍽️ বাংলাদেশের ৬৪ জেলা ফুড পাসপোর্ট</h1><p>জেলা ঘুরে ঘুরে বাংলাদেশের স্বাদ আবিষ্কার করুন 🇧🇩</p></header>
+<main>
+<section class="card"><h2>🗺️ বাংলাদেশের জেলা মানচিত্র</h2><p class="muted">বাংলাদেশের হালকা রঙের জেলা মানচিত্র—কোনো পিন নেই। জেলা বেছে নিতে নিচের তালিকায় চাপ দিন।</p><div id="map" aria-label="বাংলাদেশের জেলা-ভিত্তিক মানচিত্র"></div>
+<div class="controls"><input id="search" placeholder="জেলার নাম লিখে খুঁজুন…"><select id="division"><option value="">সব বিভাগ</option><option>ঢাকা</option><option>চট্টগ্রাম</option><option>রাজশাহী</option><option>খুলনা</option><option>বরিশাল</option><option>সিলেট</option><option>রংপুর</option><option>ময়মনসিংহ</option></select></div>
+<div id="districts" class="grid"></div>
+<p class="note">বাংলাদেশের বাইরের অংশে কোনো দেশের মানচিত্র বা পিন দেখানো হবে না। জেলার সীমানার তথ্য লোড করতে ইন্টারনেট প্রয়োজন। তথ্যসূত্র: Bangladesh administrative boundaries.</p></section>
+<section class="card" id="foodcard"><h2 id="foodtitle">📍 একটি জেলা বেছে নিন</h2><p class="muted">জেলার পরিচিত খাবার এখানে দেখানো হবে।</p><div id="foods" class="foods"></div></section>
+<section class="card"><h2>❤️ আমার ফুড পাসপোর্ট</h2><p id="progress">০ / ৬৪ জেলা ঘোরা হয়েছে</p><button class="btn" id="checkin">এই জেলায় চেক-ইন</button><p class="note">চেক-ইন আপনার এই ব্রাউজারেই সংরক্ষিত থাকবে।</p></section>
+</main>
+<footer>ফুড পাসপোর্ট 🇧🇩 • বাংলাদেশের স্বাদ, আপনার সংগ্রহে ❤️<br><small>প্রাথমিক সংস্করণ: জেলার তথ্য ও খাবারের তালিকা ধাপে ধাপে যাচাই ও সমৃদ্ধ করা হবে।</small></footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const districts=[
+["ঢাকা","ঢাকা",23.7115,90.4111,"বিরিয়ানি","বাকরখানি","মোরগ পোলাও"],["ফরিদপুর","ঢাকা",23.6071,89.8429,"খেজুরের গুড়","স্থানীয় মিষ্টি"],["গাজীপুর","ঢাকা",24.0023,90.4264,"কাঁঠাল","স্থানীয় মিষ্টি"],["গোপালগঞ্জ","ঢাকা",23.0051,89.8266,"রসগোল্লা"],["কিশোরগঞ্জ","ঢাকা",24.4449,90.7766,"পনির","মিষ্টি"],["মাদারীপুর","ঢাকা",23.17,90.20,"খেজুরের গুড়"],["মানিকগঞ্জ","ঢাকা",23.86,90.00,"খেজুরের গুড়"],["মুন্সীগঞ্জ","ঢাকা",23.55,90.53,"ভাগ্যকুলের মিষ্টি"],["নারায়ণগঞ্জ","ঢাকা",23.62,90.50,"রসমালাই"],["নরসিংদী","ঢাকা",23.92,90.72,"সাগর কলা"],["রাজবাড়ী","ঢাকা",23.75,89.65,"চমচম"],["শরীয়তপুর","ঢাকা",23.22,90.35,"ইলিশ"],["টাঙ্গাইল","ঢাকা",24.25,89.92,"পোড়াবাড়ির চমচম"],["জামালপুর","ময়মনসিংহ",24.94,89.94,"ছানার পায়েস"],["ময়মনসিংহ","ময়মনসিংহ",24.75,90.40,"মুক্তাগাছার মণ্ডা"],["নেত্রকোনা","ময়মনসিংহ",24.88,90.73,"বালিশ মিষ্টি"],["শেরপুর","ময়মনসিংহ",25.02,90.02,"ছানার পায়েস"],["বগুড়া","রাজশাহী",24.85,89.38,"দই"],["জয়পুরহাট","রাজশাহী",25.10,89.02,"চালের খাবার"],["নওগাঁ","রাজশাহী",24.79,88.93,"প্যারা সন্দেশ"],["নাটোর","রাজশাহী",24.42,89.00,"কাঁচাগোল্লা"],["চাঁপাইনবাবগঞ্জ","রাজশাহী",24.60,88.28,"আম"],["পাবনা","রাজশাহী",24.00,89.23,"ঘি"],["রাজশাহী","রাজশাহী",24.37,88.60,"আম"],["সিরাজগঞ্জ","রাজশাহী",24.45,89.70,"তাড়াশের দুধ"],["দিনাজপুর","রংপুর",25.62,88.64,"লিচু"],["গাইবান্ধা","রংপুর",25.33,89.54,"রসমঞ্জুরি"],["কুড়িগ্রাম","রংপুর",25.81,89.65,"চিলমারীর খাবার"],["লালমনিরহাট","রংপুর",25.92,89.45,"স্থানীয় পিঠা"],["নীলফামারী","রংপুর",25.93,88.86,"স্থানীয় পিঠা"],["পঞ্চগড়","রংপুর",26.34,88.55,"চা"],["রংপুর","রংপুর",25.75,89.25,"হাঁড়িভাঙা আম"],["ঠাকুরগাঁও","রংপুর",26.03,88.46,"সূর্যপুরী আম"],["বরগুনা","বরিশাল",22.16,90.13,"শুঁটকি"],["বরিশাল","বরিশাল",22.70,90.37,"আমড়া"],["ভোলা","বরিশাল",22.69,90.65,"মহিষের দুধের দই"],["ঝালকাঠি","বরিশাল",22.64,90.20,"আমড়া"],["পটুয়াখালী","বরিশাল",22.36,90.33,"মহিষের দই"],["পিরোজপুর","বরিশাল",22.58,89.97,"নারকেলের মিষ্টি"],["বান্দরবান","চট্টগ্রাম",22.20,92.22,"বাঁশকোরল"],["ব্রাহ্মণবাড়িয়া","চট্টগ্রাম",23.96,91.11,"ছানামুখী"],["চাঁদপুর","চট্টগ্রাম",23.23,90.67,"ইলিশ"],["চট্টগ্রাম","চট্টগ্রাম",22.36,91.80,"মেজবানি মাংস"],["কুমিল্লা","চট্টগ্রাম",23.46,91.18,"রসমালাই"],["কক্সবাজার","চট্টগ্রাম",21.43,91.97,"শুঁটকি"],["ফেনী","চট্টগ্রাম",23.02,91.40,"মিষ্টি"],["খাগড়াছড়ি","চট্টগ্রাম",23.12,91.98,"বাঁশকোরল"],["লক্ষ্মীপুর","চট্টগ্রাম",22.94,90.84,"নারকেলের মিষ্টি"],["নোয়াখালী","চট্টগ্রাম",22.87,91.10,"নারকেলের নাড়ু"],["রাঙ্গামাটি","চট্টগ্রাম",22.73,92.30,"পাহাড়ি খাবার"],["হবিগঞ্জ","সিলেট",24.37,91.42,"সাতকরা"],["মৌলভীবাজার","সিলেট",24.48,91.78,"সাতকরা"],["সুনামগঞ্জ","সিলেট",25.07,91.40,"হাওরের মাছ"],["সিলেট","সিলেট",24.89,91.87,"সাতকরা"],["বাগেরহাট","খুলনা",22.65,89.79,"চিংড়ি"],["চুয়াডাঙ্গা","খুলনা",23.64,88.84,"পান"],["যশোর","খুলনা",23.17,89.21,"খই-নাড়ু"],["ঝিনাইদহ","খুলনা",23.54,89.15,"মিষ্টি"],["খুলনা","খুলনা",22.82,89.57,"চুইঝাল"],["কুষ্টিয়া","খুলনা",23.90,89.12,"তিলের খাজা"],["মাগুরা","খুলনা",23.49,89.42,"রসগোল্লা"],["মেহেরপুর","খুলনা",23.76,88.63,"সাবিত্রী মিষ্টি"],["নড়াইল","খুলনা",23.17,89.51,"পেড়া"],["সাতক্ষীরা","খুলনা",22.72,89.07,"সন্দেশ"]];
+const map=L.map('map',{zoomControl:true,scrollWheelZoom:false}).setView([23.8,90.3],7);
+let selected=0, checked=JSON.parse(localStorage.getItem('foodpassport-checkins')||'[]');
+// Draw district boundary polygons only; deliberately no marker pins.
+fetch('https://raw.githubusercontent.com/yasserius/bangladesh_geojson_shapefile/main/small/small_bangladesh_geojson_adm2_64_districts_zillas.json')
+ .then(r=>{if(!r.ok)throw new Error('Boundary data unavailable');return r.json()})
+ .then(data=>{const softColors=['#d7e8cf','#f2e8bd','#cfe4f2','#eadcf0'];const layer=L.geoJSON(data,{style:(feature)=>({color:'#6f8b82',weight:1.15,fillColor:softColors[(Number(feature.properties?.shapeID||feature.properties?.ID||feature.properties?.id||0))%softColors.length],fillOpacity:0.96})}).addTo(map);map.fitBounds(layer.getBounds(),{padding:[12,12]});})
+ .catch(()=>{document.querySelector('#map').insertAdjacentHTML('beforeend','<div style="position:absolute;z-index:500;bottom:8px;left:8px;background:white;padding:8px;border-radius:8px;font-size:12px">জেলার সীমানা লোড হয়নি—ইন্টারনেট সংযোগ পরীক্ষা করুন।</div>')});
+const bnDigits=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+function showFood(i){selected=i;const d=districts[i];document.getElementById('foodtitle').textContent='📍 '+d[0]+' জেলার খাবার';document.getElementById('foods').innerHTML=d.slice(4).map((f,j)=>`<div class="food"><span class="emoji">${['🍛','🍮','🐟','🍚'][j%4]}</span><div><strong>${f}</strong><small>${d[0]} • ফুড পাসপোর্ট</small></div></div>`).join('');document.getElementById('checkin').textContent=checked.includes(d[0])?'✓ ঘোরা হয়েছে':'এই জেলায় চেক-ইন';renderButtons()}
+function renderButtons(){const q=document.getElementById('search').value.trim();const div=document.getElementById('division').value;document.getElementById('districts').innerHTML=districts.map((d,i)=>({d,i})).filter(x=>(!q||x.d[0].includes(q))&&(!div||x.d[1]===div)).map(x=>`<button class="district ${x.i===selected?'active':''}" data-i="${x.i}">${x.d[0]}${checked.includes(x.d[0])?' ✓':''}</button>`).join('');document.querySelectorAll('.district').forEach(b=>b.onclick=()=>{showFood(+b.dataset.i)})}
+
+document.getElementById('search').addEventListener('input',renderButtons);document.getElementById('division').addEventListener('change',renderButtons);
+document.getElementById('checkin').onclick=()=>{const n=districts[selected][0];checked=checked.includes(n)?checked.filter(x=>x!==n):[...checked,n];localStorage.setItem('foodpassport-checkins',JSON.stringify(checked));document.getElementById('progress').textContent=bnDigits(checked.length)+' / ৬৪ জেলা ঘোরা হয়েছে';showFood(selected)};
+document.getElementById('progress').textContent=bnDigits(checked.length)+' / ৬৪ জেলা ঘোরা হয়েছে';renderButtons();showFood(0);
+</script></body></html>
